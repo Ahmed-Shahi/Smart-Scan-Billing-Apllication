@@ -1,7 +1,7 @@
 #!/bin/sh
 # This is a generated file; do not edit or check into version control.
-export "FLUTTER_ROOT=D:\flutter_windows_3.41.9-stable\flutter"
-export "FLUTTER_APPLICATION_PATH=C:\Users\ahmed\Desktop\Ahmed Shahi\Flutter Applications\smartscan_app"
+export "FLUTTER_ROOT=D:\Flutter Software\flutter_windows_3.41.2-stable\flutter"
+export "FLUTTER_APPLICATION_PATH=C:\Users\ahmed\Desktop\SCAN APP\Smart-Scan-Billing-Apllication"
 export "COCOAPODS_PARALLEL_CODE_SIGN=true"
 export "FLUTTER_BUILD_DIR=build"
 export "FLUTTER_BUILD_NAME=1.0.0"

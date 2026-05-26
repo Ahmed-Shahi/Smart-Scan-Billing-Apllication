@@ -43,3 +43,31 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Environment variables and secrets
+.env*
+*-local
+
+# Android security and local configuration
+*.keystore
+*.jks
+android/key.properties
+android/local.properties
+android/app/google-services.json
+
+# Missing Flutter/Dart generated files
+.flutter-plugins
+.packages
+
+# iOS/macOS generated files and dependencies
+**/ios/Flutter/Generated.xcconfig
+**/ios/Flutter/flutter_export_environment.sh
+**/ios/Flutter/Flutter.podspec
+**/ios/Flutter/App.framework
+**/ios/Flutter/Flutter.framework
+**/ios/Flutter/Generated.framework
+**/ios/Flutter/tmp.xcconfig
+**/ios/Pods/
+
+# Web build artifacts
+build/web

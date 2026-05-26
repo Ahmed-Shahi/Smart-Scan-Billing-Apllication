@@ -1,7 +1,29 @@
 import 'package:flutter/material.dart';
-import 'login_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
+import 'features/auth/login_screen.dart';
+import 'features/auth/signup_screen.dart';
+import 'features/dashboard/dashboard_screen.dart';
+import 'features/scan/scan_cart_screen.dart';
+import 'features/billing/bill_summary_screen.dart';
+import 'features/inventory/inventory_screen.dart';
+import 'features/history/billing_history_screen.dart';
+import 'features/customer/shop_selection_screen.dart';
+import 'features/customer/product_price_scanner_screen.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  
+  // Initialize Firebase (Android only)
+  if (!kIsWeb) {
+    try {
+      await Firebase.initializeApp();
+    } catch (e) {
+      print('Firebase initialization error: $e');
+    }
+  }
+  // For Web: Firebase is initialized via index.html scripts
+  
   runApp(const SmartScanApp());
 }
 
@@ -15,8 +37,21 @@ class SmartScanApp extends StatelessWidget {
       title: 'SmartScan',
       theme: ThemeData(
         fontFamily: 'Arial',
+        primaryColor: const Color(0xFF031B3A),
       ),
-      home: const RoleSelectionScreen(),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const RoleSelectionScreen(),
+        '/login': (context) => const LoginScreen(),
+        '/signup': (context) => const SignupScreen(),
+        '/dashboard': (context) => const DashboardScreen(),
+        '/scan': (context) => const ScanCartScreen(),
+        '/generate-bill': (context) => const BillSummaryScreen(),
+        '/inventory': (context) => const InventoryScreen(),
+        '/history': (context) => const BillingHistoryScreen(),
+        '/shop-selection': (context) => const ShopSelectionScreen(),
+        '/product-price-scanner': (context) => const ProductPriceScannerScreen(),
+      },
     );
   }
 }
@@ -43,15 +78,12 @@ class RoleSelectionScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-
               const Icon(
                 Icons.qr_code_scanner,
                 size: 90,
                 color: Colors.white,
               ),
-
-              const SizedBox(height: 30),
-
+              const SizedBox(height: 20),
               const Text(
                 "Welcome To Smart Scan",
                 style: TextStyle(
@@ -67,9 +99,7 @@ class RoleSelectionScreen extends StatelessWidget {
                   ],
                 ),
               ),
-
               const SizedBox(height: 15),
-
               const Text(
                 "Choose Your Mode",
                 style: TextStyle(
@@ -78,27 +108,20 @@ class RoleSelectionScreen extends StatelessWidget {
                   fontWeight: FontWeight.w500,
                 ),
               ),
-
               const SizedBox(height: 50),
-
               CustomButton(
-                title: "CUSTOMER",
+                title: "Customer",
                 icon: Icons.person,
                 onTap: () {
-                  // Navigate to customer screen
+                  Navigator.pushNamed(context, '/shop-selection');
                 },
               ),
-
               const SizedBox(height: 25),
-
               CustomButton(
-                title: "SHOPKEEPER",
+                title: "Shopkeeper",
                 icon: Icons.store,
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const LoginScreen()),
-                  );
+                  Navigator.pushNamed(context, '/login');
                 },
               ),
             ],
@@ -125,7 +148,7 @@ class CustomButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: 280,
-      height: 80,
+      height: 60,
       child: ElevatedButton.icon(
         onPressed: onTap,
         icon: Icon(
